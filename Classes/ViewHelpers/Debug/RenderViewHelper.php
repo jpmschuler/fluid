@@ -113,7 +113,9 @@ class RenderViewHelper extends AbstractViewHelper
                 'EXT:',
                 $path
             );
-            $path = PathUtility::stripPathSitePrefix($path);
+            if (strpos($path,Environment::getPublicPath()) !== false) {
+                $path = substr($path, strlen(Environment::getPublicPath() . '/'));
+            }
             $debugInfo['Partial'] = 'Partial: ' . $path;
         }
         if (isset($this->arguments['section'])) {
